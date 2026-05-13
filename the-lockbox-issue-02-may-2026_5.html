@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Lockbox — Issue 02 / May 15, 2026</title>
+  <meta name="description" content="The Lockbox is SDMLS's official newsletter keeping members informed about industry developments, platform updates, and tools to grow your business.">
+
+  <!--
+    EMBEDDING NOTES FOR sdmls.com
+    -----------------------------
+    All styles below are scoped under .lockbox so this is safe to drop into a
+    WordPress Custom HTML block without colliding with theme styles. You can
+    either:
+      (a) embed the entire file via <iframe>, or
+      (b) paste everything from <link ...> through </article> into a
+          Custom HTML block on the page.
+  -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    body { margin: 0; background: #F7F3EC; }
+
+    .lockbox {
+      --ink: #1A2238;
+      --ink-soft: #4A5167;
+      --cream: #F7F3EC;
+      --cream-deep: #ECE5D6;
+      --brass: #B6873A;
+      --brass-deep: #8B6325;
+      --rule: rgba(26, 34, 56, 0.12);
+      --up: #1B7A4A;
+      --down: #A8431D;
+
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 56px 40px 80px;
+      box-sizing: border-box;
+    }
+    .lockbox *,
+    .lockbox *::before,
+    .lockbox *::after { box-sizing: border-box; }
+
+    /* ------- Masthead ------- */
+    .lockbox__masthead {
+      text-align: center;
+      border-top: 3px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding: 30px 0 22px;
+      margin-bottom: 44px;
+    }
+    .lockbox__eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--brass-deep);
+      margin: 0 0 14px;
+    }
+    .lockbox__title {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 144, 'wght' 500, 'SOFT' 50;
+      font-size: clamp(58px, 9.5vw, 96px);
+      line-height: 0.92;
+      letter-spacing: -0.028em;
+      margin: 0 0 18px;
+      color: var(--ink);
+    }
+    .lockbox__ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 0 0 14px;
+      color: var(--brass);
+    }
+    .lockbox__ornament span {
+      width: 48px;
+      height: 1px;
+      background: var(--brass);
+    }
+    .lockbox__ornament svg { display: block; }
+    .lockbox__tagline {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 24, 'wght' 400;
+      font-style: italic;
+      font-size: 17px;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+    .lockbox__meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid var(--rule);
+    }
+
+    /* ------- TOC ------- */
+    .lockbox__toc {
+      background: var(--cream-deep);
+      border: 1px solid var(--rule);
+      padding: 28px 32px;
+      margin-bottom: 60px;
+    }
+    .lockbox__toc-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--brass-deep);
+      margin: 0 0 16px;
+    }
+    .lockbox__toc ol {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: toc;
+    }
+    .lockbox__toc li {
+      counter-increment: toc;
+      display: flex;
+      gap: 16px;
+      padding: 9px 0;
+      border-bottom: 1px dashed var(--rule);
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 36, 'wght' 450;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+    .lockbox__toc li:last-child { border-bottom: none; }
+    .lockbox__toc li::before {
+      content: counter(toc, decimal-leading-zero);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--brass);
+      flex-shrink: 0;
+      padding-top: 4px;
+    }
+
+    /* ------- Sections ------- */
+    .lockbox__section { margin-bottom: 60px; }
+    .lockbox__label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--brass-deep);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 0 0 18px;
+    }
+    .lockbox__label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+    .lockbox__heading {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 96, 'wght' 500;
+      font-size: clamp(28px, 4.5vw, 38px);
+      line-height: 1.12;
+      letter-spacing: -0.018em;
+      margin: 0 0 22px;
+      color: var(--ink);
+    }
+    .lockbox__subheading {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 36, 'wght' 500;
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin: 32px 0 14px;
+      padding-top: 18px;
+      border-top: 1px solid var(--rule);
+    }
+    .lockbox p {
+      margin: 0 0 16px;
+      font-size: 17px;
+      line-height: 1.65;
+    }
+    .lockbox p:last-child { margin-bottom: 0; }
+    .lockbox a {
+      color: var(--brass-deep);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color 120ms ease;
+    }
+    .lockbox a:hover { color: var(--ink); }
+    .lockbox strong { font-weight: 600; }
+
+    /* ------- Featured card (dark) ------- */
+    .lockbox__featured {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 46px 42px;
+      margin-bottom: 60px;
+      position: relative;
+    }
+    .lockbox__featured::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--brass);
+    }
+    .lockbox__featured .lockbox__label { color: var(--brass); }
+    .lockbox__featured .lockbox__label::after { background: rgba(247, 243, 236, 0.18); }
+    .lockbox__featured .lockbox__heading { color: var(--cream); }
+    .lockbox__featured p { color: rgba(247, 243, 236, 0.92); }
+    .lockbox__featured a { color: var(--brass); }
+    .lockbox__featured a:hover { color: var(--cream); }
+    .lockbox__featured strong { color: var(--cream); }
+
+    /* ------- Detail box ------- */
+    .lockbox__detail {
+      background: rgba(247, 243, 236, 0.07);
+      border-left: 3px solid var(--brass);
+      padding: 22px 26px;
+      margin: 22px 0;
+    }
+    .lockbox__detail h4 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin: 0 0 14px;
+      font-weight: 500;
+    }
+    .lockbox__detail ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .lockbox__detail li {
+      padding: 5px 0;
+      font-size: 15px;
+      color: rgba(247, 243, 236, 0.92);
+      line-height: 1.55;
+    }
+    .lockbox__detail li strong { color: var(--cream); }
+
+    /* Light-version detail box for normal sections */
+    .lockbox__section .lockbox__detail {
+      background: var(--cream-deep);
+      border-left-color: var(--brass);
+    }
+    .lockbox__section .lockbox__detail h4 { color: var(--brass-deep); }
+    .lockbox__section .lockbox__detail li { color: var(--ink); }
+    .lockbox__section .lockbox__detail li strong { color: var(--ink); }
+
+    /* ------- Steps ------- */
+    .lockbox__steps {
+      counter-reset: step;
+      list-style: none;
+      padding: 0;
+      margin: 26px 0 22px;
+    }
+    .lockbox__steps li {
+      counter-increment: step;
+      display: flex;
+      gap: 20px;
+      padding: 15px 0;
+      border-top: 1px solid rgba(247, 243, 236, 0.14);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+    .lockbox__steps li:first-child { border-top: none; padding-top: 6px; }
+    .lockbox__steps li::before {
+      content: counter(step, decimal-leading-zero);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--brass);
+      flex-shrink: 0;
+      padding-top: 3px;
+      min-width: 24px;
+    }
+
+    /* ------- Pull quote ------- */
+    .lockbox__pullquote {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 144, 'wght' 350;
+      font-style: italic;
+      font-size: clamp(22px, 3.4vw, 28px);
+      line-height: 1.28;
+      color: var(--ink);
+      padding: 6px 0 6px 32px;
+      border-left: 3px solid var(--brass);
+      margin: 30px 0;
+    }
+    .lockbox__pullquote cite {
+      display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-style: normal;
+      color: var(--ink-soft);
+      margin-top: 16px;
+    }
+
+    /* ------- Market panels (paired comparison) ------- */
+    .lockbox__panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 28px 0 22px;
+    }
+    .lockbox__panel {
+      background: var(--cream-deep);
+      border-top: 3px solid var(--brass);
+      padding: 26px 24px;
+    }
+    .lockbox__panel-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--brass-deep);
+      margin: 0 0 4px;
+    }
+    .lockbox__panel-sub {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 12px;
+      color: var(--ink-soft);
+      margin: 0 0 18px;
+      letter-spacing: 0.02em;
+    }
+    .lockbox__hero-stat {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 16px;
+    }
+    .lockbox__hero-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 0 0 8px;
+    }
+    .lockbox__hero-value {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 144, 'wght' 500;
+      font-size: 38px;
+      line-height: 1;
+      color: var(--ink);
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
+    }
+    .lockbox__hero-trends {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 13px;
+    }
+    .lockbox__hero-trends span { color: var(--ink-soft); }
+    .lockbox__hero-trends .up { color: var(--up); }
+    .lockbox__hero-trends .down { color: var(--down); }
+    .lockbox__hero-trends .flat { color: var(--ink-soft); }
+    .lockbox__metrics {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .lockbox__metrics li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--rule);
+      font-size: 14px;
+    }
+    .lockbox__metrics li:last-child { border-bottom: none; }
+    .lockbox__metrics-key {
+      color: var(--ink-soft);
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
+    .lockbox__metrics-val {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 36, 'wght' 500;
+      font-size: 16px;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .lockbox__metrics-val .up { color: var(--up); margin-left: 4px; }
+    .lockbox__metrics-val .down { color: var(--down); margin-left: 4px; }
+    .lockbox__metrics-val .flat { color: var(--ink-soft); margin-left: 4px; }
+    .lockbox__source {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--ink-soft);
+      margin-top: 18px;
+    }
+
+    /* ------- Horizon list ------- */
+    .lockbox__horizon {
+      list-style: none;
+      padding: 0;
+      margin: 22px 0 0;
+    }
+    .lockbox__horizon li {
+      padding: 16px 0;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      gap: 20px;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+    .lockbox__horizon li:first-child { border-top: 1px solid var(--ink); }
+    .lockbox__horizon li:last-child { border-bottom: 1px solid var(--rule); }
+    .lockbox__horizon-marker {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--brass-deep);
+      flex-shrink: 0;
+      padding-top: 4px;
+      min-width: 86px;
+    }
+
+    /* ------- Footer ------- */
+    .lockbox__footer {
+      border-top: 3px solid var(--ink);
+      margin-top: 70px;
+      padding-top: 34px;
+      text-align: center;
+    }
+    .lockbox__footer-mark {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: 'opsz' 96, 'wght' 500;
+      font-size: 24px;
+      color: var(--ink);
+      margin: 0 0 20px;
+    }
+    .lockbox__footer p {
+      font-size: 14px;
+      color: var(--ink-soft);
+      margin: 0 0 8px;
+    }
+    .lockbox__footer-note {
+      margin-top: 16px !important;
+      font-style: italic;
+    }
+
+    /* ------- Mobile ------- */
+    @media (max-width: 600px) {
+      .lockbox { padding: 32px 22px 56px; font-size: 16px; }
+      .lockbox__featured { padding: 32px 24px; }
+      .lockbox__toc { padding: 22px; }
+      .lockbox__meta { flex-direction: column; gap: 6px; align-items: flex-start; }
+      .lockbox__stats { grid-template-columns: 1fr; }
+      .lockbox__panels { grid-template-columns: 1fr; gap: 16px; }
+      .lockbox__horizon li { flex-direction: column; gap: 6px; }
+      .lockbox__horizon-marker { min-width: auto; padding-top: 0; }
+      .lockbox__pullquote { padding-left: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<article class="lockbox">
+
+  <!-- MASTHEAD -->
+  <header class="lockbox__masthead">
+    <p class="lockbox__eyebrow">San Diego MLS · Member Brief</p>
+    <h1 class="lockbox__title">The Lockbox</h1>
+    <div class="lockbox__ornament" aria-hidden="true">
+      <span></span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 1L15 8L8 15L1 8L8 1Z" stroke="currentColor" stroke-width="1.2"/>
+        <circle cx="8" cy="8" r="2" fill="currentColor"/>
+      </svg>
+      <span></span>
+    </div>
+    <p class="lockbox__tagline">Your inside look at what's shaping SDMLS and the industry.</p>
+    <div class="lockbox__meta">
+      <span>Issue 02</span>
+      <span>May 15, 2026</span>
+    </div>
+  </header>
+
+  <!-- TABLE OF CONTENTS -->
+  <nav class="lockbox__toc">
+    <p class="lockbox__toc-title">In This Issue</p>
+    <ol>
+      <li>SUPRA eKey access now available for SDAR members</li>
+      <li>AB 723 reminder — disclosing digitally altered images</li>
+      <li>API First, five months in</li>
+      <li>IDX: the case for owning your digital storefront</li>
+      <li>Training, twice a day — and a team that comes to you</li>
+      <li>Market snapshot: San Diego County, April 2026</li>
+      <li>On the horizon</li>
+    </ol>
+  </nav>
+
+  <!-- 01 — FEATURED -->
+  <section class="lockbox__featured">
+    <p class="lockbox__label">Featured</p>
+    <h2 class="lockbox__heading">SUPRA eKey access is now available for SDAR members</h2>
+    <p>SDAR members can now subscribe to SUPRA app access directly through SDMLS — giving you the flexibility to manage property access from your smartphone. SUPRA provides an electronic key (eKey) via mobile app, allowing secure and easy entry to participating lockboxes across our partner regions.</p>
+
+    <div class="lockbox__detail">
+      <h4>Subscription Details</h4>
+      <ul>
+        <li><strong>Activation fee:</strong> $50 (plus prorated monthly fee)</li>
+        <li><strong>Monthly fee:</strong> $21.24, charged on the 9th to a card on file</li>
+        <li><strong>Coverage area:</strong> Southwest Riverside, Orange County, Los Angeles, and Southern San Bernardino</li>
+        <li><strong>Cancel anytime</strong> — though the $50 activation fee will reapply if reinstated</li>
+      </ul>
+    </div>
+
+    <p><strong>How to get started:</strong></p>
+    <ol class="lockbox__steps">
+      <li>Complete both the CLAW and OCAR forms — <a href="https://www.jotform.com/sign/250065374113044/invite/01jh126h59d48f67452499795e">access the forms here</a>.</li>
+      <li>Allow 24–48 hours for processing (Monday–Friday).</li>
+      <li>Once processed, you'll receive a confirmation, your key assignment, and setup instructions.</li>
+    </ol>
+
+    <p>Need access outside the partner footprint? The Reciprocal Department can help — call <strong>858-373-4031</strong>.</p>
+  </section>
+
+  <!-- 02 — COMPLIANCE -->
+  <section class="lockbox__section">
+    <p class="lockbox__label">Compliance Corner</p>
+    <h2 class="lockbox__heading">AB 723 reminder — disclosing digitally altered images</h2>
+    <p>Effective January 1, 2026, California Business &amp; Professions Code §10140.8 requires disclosure whenever listing images have been digitally altered. SDMLS Participants, Subscribers, and Vendors are all responsible for compliance — and we continue to see questions from members about where the line falls.</p>
+
+    <div class="lockbox__detail">
+      <h4>A Quick Refresher</h4>
+      <ul>
+        <li><strong>"Digitally altered" goes beyond color correction.</strong> Virtual staging, removed objects, edited features, and AI-generated enhancements all qualify.</li>
+        <li><strong>Disclosure must travel with the image</strong> — wherever it appears, on the MLS and downstream.</li>
+        <li><strong>When in doubt, disclose.</strong> The safer call is always disclosure; reach out to support if a specific case is unclear.</li>
+      </ul>
+    </div>
+
+    <p>Full SDMLS guidance is at <a href="https://sdmls.com/ab-723/">sdmls.com/ab-723</a>.</p>
+  </section>
+
+  <!-- 03 — PLATFORM -->
+  <section class="lockbox__section">
+    <p class="lockbox__label">Platform Update</p>
+    <h2 class="lockbox__heading">API First, five months in</h2>
+    <p>When SDMLS published its <a href="https://sdmls.com/sdmls-case-study-api-first/">API First case study</a> in February, the headline was technical: we rebuilt the platform around a modern API at its center, treating every data exchange as a first-class integration. Five months later, the practical impact for members is starting to show.</p>
+    <p>The architecture means faster, more reliable data flow to the tools you actually use — CMA platforms, IDX feeds, transaction software, marketing tech. It means cleaner vendor partnerships, with integrations that no longer require bespoke workarounds. And it gives SDMLS the foundation to ship new member-facing features faster than the old stack allowed.</p>
+    <p>If you build with SDMLS data — or your brokerage's tech stack pulls from us — this is the work making your workflows quietly smoother. The full case study is on <a href="https://sdmls.com/sdmls-case-study-api-first/">sdmls.com</a>.</p>
+  </section>
+
+  <!-- 04 — GROW YOUR BUSINESS -->
+  <section class="lockbox__section">
+    <p class="lockbox__label">Grow Your Business</p>
+    <h2 class="lockbox__heading">IDX: the case for owning your digital storefront</h2>
+    <p>The Clear Cooperation conversation in this issue underlines something easy to forget in 2026: when a buyer encounters one of your listings online, they're far more likely to see it first on a national portal than on your own site. That's a market reality — but it doesn't have to mean handing those buyers off to someone else's platform, with someone else's ads alongside your listing.</p>
+
+    <p>That's the case for IDX. <strong>Internet Data Exchange</strong> feeds let you display active MLS property listings directly on your own website, refreshed automatically as the MLS updates. Buyers search on your domain. The lead — and the brand impression — stays with you.</p>
+
+    <div class="lockbox__detail">
+      <h4>Three Data Feeds, Three Purposes</h4>
+      <ul>
+        <li><strong>IDX</strong> — public-facing display of active listings on agent and broker websites. The standard tool for member-facing search.</li>
+        <li><strong>VOW</strong> (Virtual Office Website) — lets registered users on your site access additional MLS data after signing in.</li>
+        <li><strong>BBO</strong> (Broker Back-Office) — full MLS data access for brokers running internal analytics and operations tools.</li>
+      </ul>
+    </div>
+
+    <p>The strategic value isn't just having listings on your site. It's the compounding benefits:</p>
+    <ul style="margin: 0 0 16px; padding-left: 22px;">
+      <li><strong>Fresh, auto-updating content</strong> that signals authority to search engines — Google rewards sites with new, relevant inventory.</li>
+      <li><strong>Behavioral data</strong> on what each visitor is actually searching for, saving, and revisiting.</li>
+      <li><strong>Direct lead capture</strong> tied to your CRM, not to a third-party aggregator skimming the relationship.</li>
+      <li><strong>Brand consistency</strong> — your site looks like you, not like a portal.</li>
+    </ul>
+
+    <h3 class="lockbox__subheading">Where iHomefinder fits</h3>
+    <p>SDMLS lists two approved IDX partners on its members page: <a href="https://www.ihomefinder.com/landing/sd-mls/">iHomefinder</a> and <a href="https://www.luxurypresence.com/get-started-sdmls/">Luxury Presence</a>, each with an SDMLS-specific landing page for getting started. (The full <a href="https://sdmls.com/wp-content/uploads/2025/03/Approved-Vendor-List.pdf">approved vendor list</a> is also on sdmls.com.)</p>
+
+    <p>iHomefinder is built tightly around the agent workflow — it combines IDX property search, lead capture, and a real estate CRM into a single connected platform. The practical effect: when a buyer saves a property on your site or sets a price-drop alert, that activity flows directly to the contact record you actually work from. The same system showing the home is also tracking the intent behind the click.</p>
+
+    <div class="lockbox__detail">
+      <h4>What's in the iHomefinder Toolkit</h4>
+      <ul>
+        <li><strong>Drop-in integration</strong> with WordPress, Wix, Squarespace, or custom sites — no full website rebuild required.</li>
+        <li><strong>Lead capture</strong> with automated property alerts, saved searches, and behavior tracking from a visitor's first page view.</li>
+        <li><strong>Integrated CRM</strong> so search activity, listing views, and lead profiles live in one place.</li>
+        <li><strong>Marketing automation</strong> — drip campaigns, listing alerts, and market updates triggered by lead behavior.</li>
+        <li><strong>AI-assisted content</strong> for emails and posts, powered by your MLS data.</li>
+      </ul>
+    </div>
+
+    <p>IDX isn't the only lever for an agent's digital presence — SEO, social, video, and reputation all matter — but it's the one that ties directly to your MLS data and your brand. If your website today functions mostly as a digital business card, an IDX integration is what turns it into a working storefront.</p>
+
+    <p>Start at <a href="https://sdmls.com/members/idx/">sdmls.com/members/idx</a> to compare approved partners and learn more about IDX, VOW, and BBO access.</p>
+  </section>
+
+  <!-- 05 — MEMBER RESOURCES -->
+  <section class="lockbox__section">
+    <p class="lockbox__label">Member Resources</p>
+    <h2 class="lockbox__heading">Two classes a day. And a team that comes to you.</h2>
+    <p>The tools change faster than most agents have time to learn them — Paragon updates, new fields, new policies, new vendor integrations. SDMLS Training is built around that reality, with two complementary tracks running year-round.</p>
+
+    <h3 class="lockbox__subheading">On the calendar</h3>
+    <p>Live classes run <strong>twice a day, Monday through Friday</strong> — ten sessions a week, every week. Topics rotate through Paragon and Paragon Connect basics, listing input, advanced search, CMA tools, IDX setup, and policy refreshers like the AB 723 disclosure rules covered earlier in this issue. Sessions are live, so questions are welcome, and the video library captures sessions for anyone who can't make a class in person.</p>
+
+    <div class="lockbox__detail">
+      <h4>Always on the Schedule</h4>
+      <ul>
+        <li>Paragon &amp; Paragon Connect — basics through advanced</li>
+        <li>Listing input and validation walkthroughs</li>
+        <li>Advanced search and saved searches</li>
+        <li>Prospecting tools and CMA workflows</li>
+        <li>IDX and data-feed setup</li>
+        <li>AB 723 and other compliance refreshers</li>
+      </ul>
+    </div>
+
+    <h3 class="lockbox__subheading">On site, at your office</h3>
+    <p>Beyond the public calendar, SDMLS staff are available to <strong>visit brokerages and team offices</strong> for hands-on training tailored to what your team is actually working on. New-agent onboarding, broker-led training days, vendor integration walkthroughs — whatever the topic, we'll come to you rather than asking the whole team to fit a class into their week. It's one of the most-used member benefits that's also the most under-promoted.</p>
+
+    <p>To schedule an office visit, call SDMLS at <strong>(858) 726-9657</strong> or reach out through the <a href="https://sdmls.com/support/agent/">support page</a>. The full class calendar is at <a href="https://sdmls.com/training-classes/">sdmls.com/training-classes</a>, and the on-demand video library is at <a href="https://sdmls.com/training-videos/">sdmls.com/training-videos</a>.</p>
+  </section>
+
+  <!-- 06 — MARKET -->
+  <section class="lockbox__section">
+    <p class="lockbox__label">Market Snapshot</p>
+    <h2 class="lockbox__heading">San Diego County, April 2026 — a tale of two segments</h2>
+    <p>The April numbers from the SDMLS market activity report show the spring market arriving — but unevenly. Detached homes accelerated on nearly every measure, while the attached segment held its ground without much movement. The split is worth understanding heading into listing-presentation season.</p>
+
+    <div class="lockbox__panels">
+
+      <!-- DETACHED PANEL -->
+      <div class="lockbox__panel">
+        <p class="lockbox__panel-eyebrow">Detached</p>
+        <p class="lockbox__panel-sub">Single Family Homes</p>
+
+        <div class="lockbox__hero-stat">
+          <p class="lockbox__hero-label">Median Sale Price</p>
+          <p class="lockbox__hero-value">$1,095,000</p>
+          <div class="lockbox__hero-trends">
+            <span class="up">▲ 2.5% vs March ($1,068,000)</span>
+            <span class="up">▲ 4.3% YoY (vs $1,050,000)</span>
+          </div>
+        </div>
+
+        <ul class="lockbox__metrics">
+          <li>
+            <span class="lockbox__metrics-key">Closed Sales</span>
+            <span class="lockbox__metrics-val">1,498 <span class="up">▲</span></span>
+          </li>
+          <li>
+            <span class="lockbox__metrics-key">New Listings</span>
+            <span class="lockbox__metrics-val">2,228 <span class="up">▲</span></span>
+          </li>
+          <li>
+            <span class="lockbox__metrics-key">Median Days on Market</span>
+            <span class="lockbox__metrics-val">12 <span class="flat">↔</span></span>
+          </li>
+          <li>
+            <span class="lockbox__metrics-key">Sale-to-List Ratio</span>
+            <span class="lockbox__metrics-val">100% <span class="flat">↔</span></span>
+          </li>
+          <li>
+            <span class="lockbox__metrics-key">Avg. $ / Sq Ft</span>
+            <span class="lockbox__metrics-val">$700 <span class="up">▲</span></span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- ATTACHED PANEL -->
+      <div class="lockbox__panel">
+        <p class="lockbox__panel-eyebrow">Attached</p>
+        <p class="lockbox__panel-sub">Condos &amp; Townhomes</p>
+
+        <div class="lockbox__hero-stat">
+          <p class="lockbox__hero-label">Median Sale Price</p>
+          <p class="lockbox__hero-value">$662,500</p>
+          <div class="lockbox__hero-trends">
+            <span class="up">▲ 0.4% vs March ($660,000)</span>
+            <span class="up">▲ 0.4% YoY (vs $660,000)</span>
+          </div>
+        </div>
+
+        <ul class="lockbox__metrics">
+          <li>
+            <span class="lockbox__metrics-key">Closed Sales</span>
+            <span class="lockbox__metrics-val">704 <span class="down">▼</span></span>
+          </li>
+          <li>
+            <span class="lockbox__metrics-key">New Listings</span>
+            <span class="lockbox__metrics-val">1,317 <span class="down">▼</span></span>
+          </li>
+          <li>
+            <span class="lockbox__metrics-key">Median Days on Market</span>
+            <span class="lockbox__metrics-val">20 <span class="down">▼</span></span>
+          </li>
+          <li>
+            <span class="lockbox__metrics-key">Sale-to-List Ratio</span>
+            <span class="lockbox__metrics-val">99% <span class="flat">↔</span></span>
+          </li>
+          <li>
+            <span class="lockbox__metrics-key">Avg. $ / Sq Ft</span>
+            <span class="lockbox__metrics-val">$638 <span class="up">▲</span></span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p class="lockbox__source">Source · SDMLS Market Activity Report, April 2026. Arrows reflect change versus March 2026.</p>
+
+    <p style="margin-top: 22px;"><strong>What the numbers say.</strong> Detached is the story this month: median up 2.5% from March and 4.3% year-over-year, closed sales jumping from 1,335 to 1,498, and new listings finally responding to demand. Homes are still selling in 12 days at 100% of list — that's a clean seller's market accelerating into spring.</p>
+    <p>Attached is steadier. The median ticked up only marginally and remains essentially flat year-over-year. The more telling number is <strong>$/sq ft at $638, still ~5% below April 2025's $670</strong> — a reminder that buyers in this segment are pricing for value, with HOA dues, special assessments, and lending standards on non-warrantable projects all weighing on appetite. Well-priced units still move (DOM is down to 20 days), but the segment isn't reflecting the same heat as detached.</p>
+    <p>The full report is at <a href="https://sdmls.com/market-stats/">sdmls.com/market-stats</a>.</p>
+  </section>
+
+  <!-- 07 — HORIZON -->
+  <section class="lockbox__section">
+    <p class="lockbox__label">On the Horizon</p>
+    <h2 class="lockbox__heading">What we're watching this month</h2>
+    <ul class="lockbox__horizon">
+      <li>
+        <span class="lockbox__horizon-marker">Reach</span>
+        <span><strong>Expand your market without expanding your dues.</strong> Through SDAR's data-share agreements with CRMLS and CLAW, SDMLS members can broaden their presence without joining multiple associations or MLSs. For reciprocal access beyond those areas: <strong>858-373-4031</strong>.</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="lockbox__footer">
+    <p class="lockbox__footer-mark">The Lockbox</p>
+    <p>Published by San Diego MLS · 4849 Ronson Court, Suite 216, San Diego, CA 92111</p>
+    <p>(858) 726-9657 · Mon–Fri, 8 a.m. – 6 p.m. · Sat, 9 a.m. – 5 p.m.</p>
+    <p class="lockbox__footer-note">Have a story idea or content for a future issue? Reach out to the SDMLS team.</p>
+  </footer>
+
+</article>
+
+</body>
+</html>
