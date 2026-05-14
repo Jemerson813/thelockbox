@@ -49,6 +49,161 @@
     .lockbox *::before,
     .lockbox *::after { box-sizing: border-box; }
 
+    /* ------- Figures / images ------- */
+    .lockbox__figure {
+      margin: 0 0 28px;
+    }
+    .lockbox__figure--hero {
+      margin: -16px 0 44px;
+      position: relative;
+    }
+    .lockbox__figure--inline {
+      margin: 8px 0 28px;
+    }
+    .lockbox__figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: contrast(1.02) saturate(0.92);
+    }
+    .lockbox__figure--hero img {
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+    .lockbox__figure--inline img {
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+    }
+    .lockbox__figure figcaption {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      padding-top: 10px;
+      border-top: 1px solid var(--rule);
+      margin-top: 14px;
+    }
+    .lockbox__featured .lockbox__figure { margin-bottom: 28px; }
+    .lockbox__featured .lockbox__figure figcaption {
+      color: rgba(247, 243, 236, 0.7);
+      border-top-color: rgba(247, 243, 236, 0.18);
+    }
+
+    /* Editorial photo placeholder (when final image isn't ready yet) */
+    .lockbox__placeholder {
+      background: var(--cream-deep);
+      border: 1px dashed rgba(139, 99, 37, 0.35);
+      aspect-ratio: 3 / 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 36px 28px;
+      text-align: center;
+      gap: 12px;
+    }
+    .lockbox__placeholder--hero { aspect-ratio: 16 / 9; }
+    .lockbox__placeholder svg {
+      width: 32px;
+      height: 32px;
+      color: var(--brass);
+      opacity: 0.7;
+    }
+    .lockbox__placeholder-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--brass-deep);
+      margin: 0;
+    }
+    .lockbox__placeholder-text {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--ink-soft);
+      margin: 0;
+      max-width: 380px;
+      line-height: 1.45;
+    }
+
+    /* Before/After split image — for AB 723 */
+    .lockbox__beforeafter {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      aspect-ratio: 4 / 3;
+      position: relative;
+      background: var(--cream-deep);
+    }
+    .lockbox__beforeafter > div {
+      position: relative;
+      overflow: hidden;
+    }
+    .lockbox__beforeafter img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.02) saturate(0.92);
+    }
+    .lockbox__beforeafter-label {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: white;
+      background: rgba(0, 0, 0, 0.65);
+      padding: 4px 8px;
+      z-index: 2;
+      font-weight: 500;
+    }
+    .lockbox__beforeafter > div:last-child .lockbox__beforeafter-label {
+      left: auto;
+      right: 8px;
+    }
+
+    /* API infographic SVG container */
+    .lockbox__api-svg {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      display: block;
+      background: #0d1730;
+    }
+
+    /* Before/After comparison — used for AB 723 illustration */
+    .lockbox__compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 16px 0 28px;
+    }
+    .lockbox__compare figure { margin: 0; }
+    .lockbox__compare .lockbox__placeholder { padding: 22px 16px; }
+    .lockbox__compare .lockbox__placeholder-text { font-size: 14px; max-width: none; }
+    .lockbox__compare figcaption {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      padding-top: 10px;
+      border-top: 1px solid var(--rule);
+      margin-top: 12px;
+    }
+    .lockbox__compare figure:last-child .lockbox__placeholder {
+      background: var(--cream);
+      border-color: var(--brass);
+    }
+    .lockbox__compare figure:last-child figcaption {
+      color: var(--brass-deep);
+      border-top-color: var(--brass);
+    }
+
     /* ------- Masthead ------- */
     .lockbox__masthead {
       text-align: center;
@@ -154,7 +309,71 @@
     }
 
     /* ------- Sections ------- */
-    .lockbox__section { margin-bottom: 60px; }
+    .lockbox__section { margin-bottom: 36px; }
+
+    /* Compact card layout — image + content side by side */
+    .lockbox__card {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 28px;
+      align-items: start;
+      border-top: 1px solid var(--rule);
+      padding-top: 32px;
+      padding-bottom: 4px;
+      margin-bottom: 36px;
+    }
+    .lockbox__card-image {
+      margin: 0;
+      position: relative;
+    }
+    .lockbox__card-image img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.02) saturate(0.92);
+    }
+    .lockbox__card-content > p:first-of-type { margin-top: 0; }
+    .lockbox__card-content .lockbox__label { margin-top: 0; }
+
+    /* Expand/collapse details */
+    .lockbox__more {
+      margin-top: 16px;
+      border-top: 1px solid var(--rule);
+    }
+    .lockbox__more > summary {
+      cursor: pointer;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--brass-deep);
+      padding: 14px 0;
+      list-style: none;
+      transition: color 200ms ease;
+      user-select: none;
+    }
+    .lockbox__more > summary::-webkit-details-marker { display: none; }
+    .lockbox__more > summary:hover { color: var(--ink); }
+    .lockbox__more > summary::after {
+      content: '＋';
+      margin-left: 10px;
+      font-weight: 500;
+      display: inline-block;
+      transition: transform 200ms ease;
+    }
+    .lockbox__more[open] > summary::after {
+      content: '−';
+    }
+    .lockbox__more[open] > summary {
+      color: var(--ink);
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 16px;
+    }
+    .lockbox__more > *:not(summary) { margin-top: 0; }
+    .lockbox__more > *:not(summary):first-of-type { margin-top: 4px; }
+
+    /* Featured card variants */
     .lockbox__label {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 11px;
@@ -212,9 +431,16 @@
     .lockbox__featured {
       background: var(--ink);
       color: var(--cream);
-      padding: 46px 42px;
-      margin-bottom: 60px;
+      padding: 36px 36px 32px;
+      margin-bottom: 36px;
       position: relative;
+    }
+    .lockbox__featured.lockbox__card {
+      border-top: none;
+      padding-top: 36px;
+    }
+    .lockbox__featured.lockbox__card .lockbox__card-image img {
+      filter: contrast(1.02) saturate(0.92) brightness(0.95);
     }
     .lockbox__featured::before {
       content: '';
@@ -476,6 +702,9 @@
       .lockbox__meta { flex-direction: column; gap: 6px; align-items: flex-start; }
       .lockbox__stats { grid-template-columns: 1fr; }
       .lockbox__panels { grid-template-columns: 1fr; gap: 16px; }
+      .lockbox__compare { grid-template-columns: 1fr; gap: 14px; }
+      .lockbox__card { grid-template-columns: 1fr; gap: 16px; padding-top: 28px; }
+      .lockbox__card-image img { aspect-ratio: 16 / 9; }
       .lockbox__horizon li { flex-direction: column; gap: 6px; }
       .lockbox__horizon-marker { min-width: auto; padding-top: 0; }
       .lockbox__pullquote { padding-left: 22px; }
@@ -520,136 +749,268 @@
   </nav>
 
   <!-- 01 — FEATURED -->
-  <section class="lockbox__featured">
-    <p class="lockbox__label">Featured</p>
-    <h2 class="lockbox__heading">Showing outside San Diego? SUPRA eKey access now available through SDMLS</h2>
-    <p><strong>SentriLock remains the primary lockbox system for SDMLS</strong> — that's not changing. But for SDAR members who regularly show properties in neighboring counties where SUPRA is the dominant system, you can now subscribe to SUPRA eKey access directly through SDMLS. The eKey lives on your smartphone, giving you a secure way to access SUPRA boxes when you're working beyond San Diego County lines.</p>
+  <section class="lockbox__featured lockbox__card">
+    <figure class="lockbox__card-image">
+      <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=900&q=80" alt="A real estate professional with a smartphone — representing mobile eKey access.">
+    </figure>
+    <div class="lockbox__card-content">
+      <p class="lockbox__label">Featured</p>
+      <h2 class="lockbox__heading">Showing outside San Diego? SUPRA eKey access now available through SDMLS</h2>
+      <p><strong>SentriLock remains the primary lockbox system for SDMLS</strong> — that's not changing. But SDAR members who regularly show properties in neighboring counties where SUPRA is the dominant system can now subscribe to SUPRA eKey access directly through SDMLS. The eKey lives on your smartphone.</p>
 
-    <div class="lockbox__detail">
-      <h4>Subscription Details</h4>
-      <ul>
-        <li><strong>Activation fee:</strong> $50 (plus prorated monthly fee)</li>
-        <li><strong>Monthly fee:</strong> $21.24</li>
-        <li><strong>Where it works:</strong> Southwest Riverside, Orange County, Los Angeles, and Southern San Bernardino — outside the SDMLS / SentriLock footprint</li>
-        <li><strong>Cancel anytime</strong> — though the $50 activation fee will reapply if reinstated</li>
-      </ul>
+      <details class="lockbox__more">
+        <summary>Subscription details &amp; how to get started</summary>
+
+        <div class="lockbox__detail">
+          <h4>Subscription Details</h4>
+          <ul>
+            <li><strong>Activation fee:</strong> $50 (plus prorated monthly fee)</li>
+            <li><strong>Monthly fee:</strong> $21.24</li>
+            <li><strong>Where it works:</strong> Southwest Riverside, Orange County, Los Angeles, and Southern San Bernardino — outside the SDMLS / SentriLock footprint</li>
+            <li><strong>Cancel anytime</strong> — though the $50 activation fee will reapply if reinstated</li>
+          </ul>
+        </div>
+
+        <p><strong>How to get started:</strong></p>
+        <ol class="lockbox__steps">
+          <li>Complete both the CLAW and OCAR forms — <a href="https://www.jotform.com/sign/250065374113044/invite/01jh126h59d48f67452499795e">access the forms here</a>.</li>
+          <li>Allow 24–48 hours for processing (Monday–Friday).</li>
+          <li>Once processed, you'll receive a confirmation, your key assignment, and setup instructions.</li>
+        </ol>
+
+        <p>Need access outside the partner footprint? The Reciprocal Department can help — call <strong>858-373-4031</strong>.</p>
+      </details>
     </div>
-
-    <p><strong>How to get started:</strong></p>
-    <ol class="lockbox__steps">
-      <li>Complete both the CLAW and OCAR forms — <a href="https://www.jotform.com/sign/250065374113044/invite/01jh126h59d48f67452499795e">access the forms here</a>.</li>
-      <li>Allow 24–48 hours for processing (Monday–Friday).</li>
-      <li>Once processed, you'll receive a confirmation, your key assignment, and setup instructions.</li>
-    </ol>
-
-    <p>Need access outside the partner footprint? The Reciprocal Department can help — call <strong>858-373-4031</strong>.</p>
   </section>
 
   <!-- 02 — COMPLIANCE -->
-  <section class="lockbox__section">
-    <p class="lockbox__label">Compliance Corner</p>
-    <h2 class="lockbox__heading">AB 723 reminder — disclosing digitally altered images</h2>
-    <p>Effective January 1, 2026, California Business &amp; Professions Code §10140.8 requires disclosure whenever listing images have been digitally altered. SDMLS Participants, Subscribers, and Vendors are all responsible for compliance — and we continue to see questions from subscribers about where the line falls.</p>
+  <section class="lockbox__section lockbox__card">
+    <figure class="lockbox__card-image">
+      <div class="lockbox__beforeafter">
+        <div>
+          <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=600&q=80" alt="An empty, unfurnished room before virtual staging.">
+          <span class="lockbox__beforeafter-label">Original</span>
+        </div>
+        <div>
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="The same room fully virtually staged with furniture and decor.">
+          <span class="lockbox__beforeafter-label">Virtually Staged</span>
+        </div>
+      </div>
+    </figure>
+    <div class="lockbox__card-content">
+      <p class="lockbox__label">Compliance Corner</p>
+      <h2 class="lockbox__heading">AB 723 reminder — disclosing digitally altered images</h2>
+      <p>Effective January 1, 2026, California Business &amp; Professions Code §10140.8 requires disclosure whenever listing images have been digitally altered. SDMLS Participants, Subscribers, and Vendors are all responsible for compliance.</p>
 
-    <div class="lockbox__detail">
-      <h4>A Quick Refresher</h4>
-      <ul>
-        <li><strong>"Digitally altered" goes beyond color correction.</strong> Virtual staging, removed objects, edited features, and AI-generated enhancements all qualify.</li>
-        <li><strong>Disclosure must travel with the image</strong> — wherever it appears, on the MLS and downstream.</li>
-        <li><strong>When in doubt, disclose.</strong> The safer call is always disclosure; reach out to support if a specific case is unclear.</li>
-      </ul>
+      <details class="lockbox__more">
+        <summary>What counts as "digitally altered"</summary>
+
+        <div class="lockbox__detail">
+          <h4>A Quick Refresher</h4>
+          <ul>
+            <li><strong>"Digitally altered" goes beyond color correction.</strong> Virtual staging, removed objects, edited features, and AI-generated enhancements all qualify.</li>
+            <li><strong>Disclosure must travel with the image</strong> — wherever it appears, on the MLS and downstream.</li>
+            <li><strong>When in doubt, disclose.</strong> The safer call is always disclosure; reach out to support if a specific case is unclear.</li>
+          </ul>
+        </div>
+
+        <p>Full SDMLS guidance is at <a href="https://sdmls.com/ab-723/">sdmls.com/ab-723</a>.</p>
+      </details>
     </div>
-
-    <p>Full SDMLS guidance is at <a href="https://sdmls.com/ab-723/">sdmls.com/ab-723</a>.</p>
   </section>
 
   <!-- 03 — PLATFORM -->
-  <section class="lockbox__section">
-    <p class="lockbox__label">Platform Update</p>
-    <h2 class="lockbox__heading">API First, five months in</h2>
-    <p>When SDMLS published its <a href="https://sdmls.com/sdmls-case-study-api-first/">API First case study</a> in February, the headline was technical: we rebuilt the platform around a modern API at its center, treating every data exchange as a first-class integration. Five months later, the practical impact for subscribers is starting to show.</p>
-    <p>The architecture means faster, more reliable data flow to the tools you actually use — CMA platforms, IDX feeds, transaction software, marketing tech. It means cleaner vendor partnerships, with integrations that no longer require bespoke workarounds. And it gives SDMLS the foundation to ship new subscriber-facing features faster than the old stack allowed.</p>
-    <p>If you build with SDMLS data — or your brokerage's tech stack pulls from us — this is the work making your workflows quietly smoother. The full case study is on <a href="https://sdmls.com/sdmls-case-study-api-first/">sdmls.com</a>.</p>
+  <section class="lockbox__section lockbox__card">
+    <figure class="lockbox__card-image">
+      <svg class="lockbox__api-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="apiGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#4a9eff" stop-opacity="0.4"/>
+            <stop offset="70%" stop-color="#1a4d8f" stop-opacity="0.1"/>
+            <stop offset="100%" stop-color="#0d1730" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="apiLine" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#4a9eff" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#4a9eff" stop-opacity="0.2"/>
+          </linearGradient>
+        </defs>
+        <!-- Background -->
+        <rect width="400" height="300" fill="#0d1730"/>
+        <!-- Subtle grid lines -->
+        <g stroke="#1a2845" stroke-width="0.5" opacity="0.6">
+          <line x1="0" y1="60" x2="400" y2="60"/>
+          <line x1="0" y1="120" x2="400" y2="120"/>
+          <line x1="0" y1="180" x2="400" y2="180"/>
+          <line x1="0" y1="240" x2="400" y2="240"/>
+          <line x1="80" y1="0" x2="80" y2="300"/>
+          <line x1="160" y1="0" x2="160" y2="300"/>
+          <line x1="240" y1="0" x2="240" y2="300"/>
+          <line x1="320" y1="0" x2="320" y2="300"/>
+        </g>
+        <!-- Central glow -->
+        <circle cx="200" cy="150" r="120" fill="url(#apiGlow)"/>
+        <!-- Connecting lines from center to each icon -->
+        <g stroke="#4a9eff" stroke-width="1.2" fill="none" opacity="0.7">
+          <line x1="200" y1="150" x2="80" y2="70"/>
+          <line x1="200" y1="150" x2="320" y2="70"/>
+          <line x1="200" y1="150" x2="50" y2="150"/>
+          <line x1="200" y1="150" x2="350" y2="150"/>
+          <line x1="200" y1="150" x2="80" y2="230"/>
+          <line x1="200" y1="150" x2="320" y2="230"/>
+        </g>
+        <!-- Outer icon nodes -->
+        <!-- Cloud (top-left) -->
+        <g transform="translate(80,70)">
+          <circle r="22" fill="#0d1730" stroke="#4a9eff" stroke-width="1.5"/>
+          <path d="M-10,2 a6,6 0 0 1 12,-2 a5,5 0 0 1 8,4 a4,4 0 0 1 0,8 h-20 a4,4 0 0 1 0,-10 z" fill="none" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+        </g>
+        <!-- Code (top-right) -->
+        <g transform="translate(320,70)">
+          <circle r="22" fill="#0d1730" stroke="#4a9eff" stroke-width="1.5"/>
+          <path d="M-8,-5 L-13,0 L-8,5 M8,-5 L13,0 L8,5 M-3,6 L3,-6" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <!-- Chart (middle-left) -->
+        <g transform="translate(50,150)">
+          <circle r="22" fill="#0d1730" stroke="#4a9eff" stroke-width="1.5"/>
+          <polyline points="-10,6 -4,-2 0,2 6,-6 10,-3" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="-10" y1="10" x2="10" y2="10" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        </g>
+        <!-- Monitor (middle-right) -->
+        <g transform="translate(350,150)">
+          <circle r="22" fill="#0d1730" stroke="#4a9eff" stroke-width="1.5"/>
+          <rect x="-9" y="-7" width="18" height="12" rx="1" fill="none" stroke="white" stroke-width="1.5"/>
+          <line x1="-4" y1="10" x2="4" y2="10" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="0" y1="5" x2="0" y2="10" stroke="white" stroke-width="1.5"/>
+        </g>
+        <!-- Gear (bottom-left) -->
+        <g transform="translate(80,230)">
+          <circle r="22" fill="#0d1730" stroke="#4a9eff" stroke-width="1.5"/>
+          <circle r="4" fill="none" stroke="white" stroke-width="1.5"/>
+          <g stroke="white" stroke-width="1.5" stroke-linecap="round">
+            <line x1="0" y1="-9" x2="0" y2="-6"/>
+            <line x1="0" y1="6" x2="0" y2="9"/>
+            <line x1="-9" y1="0" x2="-6" y2="0"/>
+            <line x1="6" y1="0" x2="9" y2="0"/>
+            <line x1="-6.5" y1="-6.5" x2="-4.5" y2="-4.5"/>
+            <line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/>
+            <line x1="-6.5" y1="6.5" x2="-4.5" y2="4.5"/>
+            <line x1="4.5" y1="-4.5" x2="6.5" y2="-6.5"/>
+          </g>
+        </g>
+        <!-- Person (bottom-right) -->
+        <g transform="translate(320,230)">
+          <circle r="22" fill="#0d1730" stroke="#4a9eff" stroke-width="1.5"/>
+          <circle cx="0" cy="-4" r="4" fill="none" stroke="white" stroke-width="1.5"/>
+          <path d="M-8,9 a8,8 0 0 1 16,0" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        </g>
+        <!-- Central API circle -->
+        <circle cx="200" cy="150" r="48" fill="#0d1730" stroke="#4a9eff" stroke-width="2"/>
+        <circle cx="200" cy="150" r="48" fill="none" stroke="#4a9eff" stroke-width="0.8" opacity="0.4" stroke-dasharray="2,3"/>
+        <text x="200" y="160" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="22" font-weight="600" fill="white" letter-spacing="2">API</text>
+      </svg>
+    </figure>
+    <div class="lockbox__card-content">
+      <p class="lockbox__label">Platform Update</p>
+      <h2 class="lockbox__heading">API First, five months in</h2>
+      <p>When SDMLS published its <a href="https://sdmls.com/sdmls-case-study-api-first/">API First case study</a> in February, the headline was technical. Five months later, the practical impact for subscribers is starting to show: faster, more reliable data flow to the CMA platforms, IDX feeds, and transaction software you actually use.</p>
+
+      <details class="lockbox__more">
+        <summary>What this means for your workflows</summary>
+        <p>The architecture means cleaner vendor partnerships, with integrations that no longer require bespoke workarounds. And it gives SDMLS the foundation to ship new subscriber-facing features faster than the old stack allowed.</p>
+        <p>If you build with SDMLS data — or your brokerage's tech stack pulls from us — this is the work making your workflows quietly smoother. The full case study is on <a href="https://sdmls.com/sdmls-case-study-api-first/">sdmls.com</a>.</p>
+      </details>
+    </div>
   </section>
 
   <!-- 04 — GROW YOUR BUSINESS -->
-  <section class="lockbox__section">
-    <p class="lockbox__label">Grow Your Business</p>
-    <h2 class="lockbox__heading">IDX: the case for owning your digital storefront</h2>
-    <p>The Clear Cooperation conversation in this issue underlines something easy to forget in 2026: when a buyer encounters one of your listings online, they're far more likely to see it first on a national portal than on your own site. That's a market reality — but it doesn't have to mean handing those buyers off to someone else's platform, with someone else's ads alongside your listing.</p>
+  <section class="lockbox__section lockbox__card">
+    <figure class="lockbox__card-image">
+      <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=900&q=80" alt="A laptop on a desk — the storefront of an IDX-enabled agent website.">
+    </figure>
+    <div class="lockbox__card-content">
+      <p class="lockbox__label">Grow Your Business</p>
+      <h2 class="lockbox__heading">IDX: the case for owning your digital storefront</h2>
+      <p>When a buyer encounters one of your listings online, they're more likely to see it first on a national portal than on your own site. <strong>Internet Data Exchange (IDX)</strong> changes that — letting you display active MLS listings directly on your site, with the lead and the brand impression staying with you.</p>
 
-    <p>That's the case for IDX. <strong>Internet Data Exchange</strong> feeds let you display active MLS property listings directly on your own website, refreshed automatically as the MLS updates. Buyers search on your domain. The lead — and the brand impression — stays with you.</p>
+      <details class="lockbox__more">
+        <summary>Three data feeds · why iHomefinder fits · how to start</summary>
 
-    <div class="lockbox__detail">
-      <h4>Three Data Feeds, Three Purposes</h4>
-      <ul>
-        <li><strong>IDX</strong> — public-facing display of active listings on agent and broker websites. The standard tool for subscriber-facing search.</li>
-        <li><strong>VOW</strong> (Virtual Office Website) — lets registered users on your site access additional MLS data after signing in.</li>
-        <li><strong>BBO</strong> (Broker Back-Office) — full MLS data access for brokers running internal analytics and operations tools.</li>
-      </ul>
+        <div class="lockbox__detail">
+          <h4>Three Data Feeds, Three Purposes</h4>
+          <ul>
+            <li><strong>IDX</strong> — public-facing display of active listings on agent and broker websites.</li>
+            <li><strong>VOW</strong> (Virtual Office Website) — lets registered users on your site access additional MLS data after signing in.</li>
+            <li><strong>BBO</strong> (Broker Back-Office) — full MLS data access for brokers running internal analytics and operations tools.</li>
+          </ul>
+        </div>
+
+        <p>The strategic value: fresh, auto-updating content that signals authority to search engines; behavioral data on what each visitor is actually searching; direct lead capture tied to your CRM; and brand consistency — your site looks like you, not like a portal.</p>
+
+        <h3 class="lockbox__subheading">Where iHomefinder fits</h3>
+        <p>SDMLS lists two approved IDX partners: <a href="https://www.ihomefinder.com/landing/sd-mls/">iHomefinder</a> and <a href="https://www.luxurypresence.com/get-started-sdmls/">Luxury Presence</a>. iHomefinder combines IDX property search, lead capture, and a real estate CRM into a single connected platform — when a buyer saves a property on your site, that activity flows directly to your contact record.</p>
+
+        <div class="lockbox__detail">
+          <h4>What's in the iHomefinder Toolkit</h4>
+          <ul>
+            <li><strong>Drop-in integration</strong> with WordPress, Wix, Squarespace, or custom sites.</li>
+            <li><strong>Lead capture</strong> with automated property alerts, saved searches, and behavior tracking.</li>
+            <li><strong>Integrated CRM</strong> so search activity, listing views, and lead profiles live in one place.</li>
+            <li><strong>Marketing automation</strong> — drip campaigns, listing alerts, and market updates triggered by lead behavior.</li>
+            <li><strong>AI-assisted content</strong> for emails and posts, powered by your MLS data.</li>
+          </ul>
+        </div>
+
+        <p>Start at <a href="https://sdmls.com/members/idx/">sdmls.com/members/idx</a> to compare approved partners and learn more about IDX, VOW, and BBO access.</p>
+      </details>
     </div>
-
-    <p>The strategic value isn't just having listings on your site. It's the compounding benefits:</p>
-    <ul style="margin: 0 0 16px; padding-left: 22px;">
-      <li><strong>Fresh, auto-updating content</strong> that signals authority to search engines — Google rewards sites with new, relevant inventory.</li>
-      <li><strong>Behavioral data</strong> on what each visitor is actually searching for, saving, and revisiting.</li>
-      <li><strong>Direct lead capture</strong> tied to your CRM, not to a third-party aggregator skimming the relationship.</li>
-      <li><strong>Brand consistency</strong> — your site looks like you, not like a portal.</li>
-    </ul>
-
-    <h3 class="lockbox__subheading">Where iHomefinder fits</h3>
-    <p>SDMLS lists two approved IDX partners on its approved partners page: <a href="https://www.ihomefinder.com/landing/sd-mls/">iHomefinder</a> and <a href="https://www.luxurypresence.com/get-started-sdmls/">Luxury Presence</a>, each with an SDMLS-specific landing page for getting started. (The full <a href="https://sdmls.com/wp-content/uploads/2025/03/Approved-Vendor-List.pdf">approved vendor list</a> is also on sdmls.com.)</p>
-
-    <p>iHomefinder is built tightly around the agent workflow — it combines IDX property search, lead capture, and a real estate CRM into a single connected platform. The practical effect: when a buyer saves a property on your site or sets a price-drop alert, that activity flows directly to the contact record you actually work from. The same system showing the home is also tracking the intent behind the click.</p>
-
-    <div class="lockbox__detail">
-      <h4>What's in the iHomefinder Toolkit</h4>
-      <ul>
-        <li><strong>Drop-in integration</strong> with WordPress, Wix, Squarespace, or custom sites — no full website rebuild required.</li>
-        <li><strong>Lead capture</strong> with automated property alerts, saved searches, and behavior tracking from a visitor's first page view.</li>
-        <li><strong>Integrated CRM</strong> so search activity, listing views, and lead profiles live in one place.</li>
-        <li><strong>Marketing automation</strong> — drip campaigns, listing alerts, and market updates triggered by lead behavior.</li>
-        <li><strong>AI-assisted content</strong> for emails and posts, powered by your MLS data.</li>
-      </ul>
-    </div>
-
-    <p>IDX isn't the only lever for an agent's digital presence — SEO, social, video, and reputation all matter — but it's the one that ties directly to your MLS data and your brand. If your website today functions mostly as a digital business card, an IDX integration is what turns it into a working storefront.</p>
-
-    <p>Start at <a href="https://sdmls.com/members/idx/">sdmls.com/members/idx</a> to compare approved partners and learn more about IDX, VOW, and BBO access.</p>
   </section>
 
   <!-- 05 — SUBSCRIBER RESOURCES -->
-  <section class="lockbox__section">
-    <p class="lockbox__label">Subscriber Resources</p>
-    <h2 class="lockbox__heading">Two classes a day. And a team that comes to you.</h2>
-    <p>The tools change faster than most agents have time to learn them — Paragon updates, new fields, new policies, new vendor integrations. SDMLS Training is built around that reality, with two complementary tracks running year-round.</p>
+  <section class="lockbox__section lockbox__card">
+    <figure class="lockbox__card-image">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="A small group at a hands-on training session.">
+    </figure>
+    <div class="lockbox__card-content">
+      <p class="lockbox__label">Subscriber Resources</p>
+      <h2 class="lockbox__heading">Two classes a day. And a team that comes to you.</h2>
+      <p>Training classes are available <strong>twice a day, Monday through Friday</strong> — up to ten sessions a week. Topics rotate through Paragon and Paragon Connect basics, listing input, advanced search, CMA tools, IDX setup, and policy refreshers like AB 723.</p>
 
-    <h3 class="lockbox__subheading">On the calendar</h3>
-    <p>Training classes are available <strong>twice a day, Monday through Friday</strong> — up to ten sessions a week. Topics rotate through Paragon and Paragon Connect basics, listing input, advanced search, CMA tools, IDX setup, and policy refreshers like the AB 723 disclosure rules covered earlier in this issue. Sessions are live, so questions are welcome, and the video library captures sessions for anyone who can't make a class in person.</p>
+      <details class="lockbox__more">
+        <summary>Class topics &amp; on-site office visits</summary>
 
-    <div class="lockbox__detail">
-      <h4>Always on the Schedule</h4>
-      <ul>
-        <li>Paragon &amp; Paragon Connect — basics through advanced</li>
-        <li>Listing input and validation walkthroughs</li>
-        <li>Advanced search and saved searches</li>
-        <li>Prospecting tools and CMA workflows</li>
-        <li>IDX and data-feed setup</li>
-        <li>AB 723 and other compliance refreshers</li>
-      </ul>
+        <div class="lockbox__detail">
+          <h4>Always on the Schedule</h4>
+          <ul>
+            <li>Paragon &amp; Paragon Connect — basics through advanced</li>
+            <li>Listing input and validation walkthroughs</li>
+            <li>Advanced search and saved searches</li>
+            <li>Prospecting tools and CMA workflows</li>
+            <li>IDX and data-feed setup</li>
+            <li>AB 723 and other compliance refreshers</li>
+          </ul>
+        </div>
+
+        <h3 class="lockbox__subheading">On site, at your office</h3>
+        <p>Beyond the public calendar, SDMLS staff are available to <strong>visit brokerages and team offices</strong> for hands-on training tailored to what your team is actually working on. New-agent onboarding, broker-led training days, vendor integration walkthroughs — whatever the topic, we'll come to you.</p>
+
+        <p>To schedule an office visit, call SDMLS at <strong>(858) 726-9657</strong> or reach out through the <a href="https://sdmls.com/support/agent/">support page</a>. Full class calendar at <a href="https://sdmls.com/training-classes/">sdmls.com/training-classes</a>; video library at <a href="https://sdmls.com/training-videos/">sdmls.com/training-videos</a>.</p>
+      </details>
     </div>
-
-    <h3 class="lockbox__subheading">On site, at your office</h3>
-    <p>Beyond the public calendar, SDMLS staff are available to <strong>visit brokerages and team offices</strong> for hands-on training tailored to what your team is actually working on. New-agent onboarding, broker-led training days, vendor integration walkthroughs — whatever the topic, we'll come to you rather than asking the whole team to fit a class into their week. It's one of the most-used subscriber benefits that's also the most under-promoted.</p>
-
-    <p>To schedule an office visit, call SDMLS at <strong>(858) 726-9657</strong> or reach out through the <a href="https://sdmls.com/support/agent/">support page</a>. The full class calendar is at <a href="https://sdmls.com/training-classes/">sdmls.com/training-classes</a>, and the on-demand video library is at <a href="https://sdmls.com/training-videos/">sdmls.com/training-videos</a>.</p>
   </section>
 
   <!-- 06 — MARKET -->
-  <section class="lockbox__section">
-    <p class="lockbox__label">Market Snapshot</p>
-    <h2 class="lockbox__heading">San Diego County, April 2026 — a tale of two segments</h2>
-    <p>The April numbers from the SDMLS market activity report show the spring market arriving — but unevenly. Detached homes accelerated on nearly every measure, while the attached segment held its ground without much movement. The split is worth understanding heading into listing-presentation season.</p>
+  <section class="lockbox__section lockbox__card">
+    <figure class="lockbox__card-image">
+      <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=900&q=80" alt="A San Diego–style single-family home — the segment leading April's market.">
+    </figure>
+    <div class="lockbox__card-content">
+      <p class="lockbox__label">Market Snapshot</p>
+      <h2 class="lockbox__heading">San Diego County, April 2026 — a tale of two segments</h2>
+      <p>Detached homes accelerated on nearly every measure in April, while the attached segment held its ground. The split is worth understanding heading into listing-presentation season.</p>
+    </div>
+  </section>
+
+  <section class="lockbox__section" style="margin-top: -16px;">
 
     <div class="lockbox__panels">
 
@@ -733,9 +1094,12 @@
 
     <p class="lockbox__source">Source · SDMLS Market Activity Report, April 2026. Arrows reflect change versus March 2026.</p>
 
-    <p style="margin-top: 22px;"><strong>What the numbers say.</strong> Detached is the story this month: median up 2.5% from March and 4.3% year-over-year, closed sales jumping from 1,335 to 1,498, and new listings finally responding to demand. Homes are still selling in 12 days at 100% of list — that's a clean seller's market accelerating into spring.</p>
-    <p>Attached is steadier. The median ticked up only marginally and remains essentially flat year-over-year. The more telling number is <strong>$/sq ft at $638, still ~5% below April 2025's $670</strong> — a reminder that buyers in this segment are pricing for value, with HOA dues, special assessments, and lending standards on non-warrantable projects all weighing on appetite. Well-priced units still move (DOM is down to 20 days), but the segment isn't reflecting the same heat as detached.</p>
-    <p>The full report is at <a href="https://sdmls.com/market-stats/">sdmls.com/market-stats</a>.</p>
+    <details class="lockbox__more">
+      <summary>What the numbers say</summary>
+      <p><strong>Detached is the story this month:</strong> median up 2.5% from March and 4.3% year-over-year, closed sales jumping from 1,335 to 1,498, and new listings finally responding to demand. Homes are still selling in 12 days at 100% of list — a clean seller's market accelerating into spring.</p>
+      <p><strong>Attached is steadier.</strong> The median ticked up only marginally and remains essentially flat year-over-year. The more telling number is <strong>$/sq ft at $638, still ~5% below April 2025's $670</strong> — a reminder that buyers in this segment are pricing for value, with HOA dues, special assessments, and lending standards on non-warrantable projects all weighing on appetite.</p>
+      <p>The full report is at <a href="https://sdmls.com/market-stats/">sdmls.com/market-stats</a>.</p>
+    </details>
   </section>
 
   <!-- 07 — HORIZON -->
